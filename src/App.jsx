@@ -15,7 +15,7 @@ export default function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const phoneNumber = "917975843594"; // 👉 Replace with your WhatsApp number
+    const phoneNumber = "917975843594"; // replace with your number
 
     const message = `Hello, I have a query:
 
@@ -27,10 +27,18 @@ Query: ${form.query}`;
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
     window.open(whatsappURL, "_blank");
+
+    // ✅ Clear form after submit
+    setForm({
+      name: "",
+      email: "",
+      mobile: "",
+      query: "",
+    });
   };
 
   return (
-    <>
+    <div className="container">
       <style>{`
         body {
           margin: 0;
@@ -52,7 +60,7 @@ Query: ${form.query}`;
           border-radius: 20px;
           width: 350px;
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-          animation: fadeIn 1s ease;
+          animation: fadeIn 0.8s ease;
         }
 
         .card h2 {
@@ -134,60 +142,58 @@ Query: ${form.query}`;
         }
       `}</style>
 
-      <div className="container">
-        <form className="card" onSubmit={handleSubmit}>
-          <h2>Contact Us</h2>
+      <form className="card" onSubmit={handleSubmit}>
+        <h2>Contact Us</h2>
 
-          <div className="input-group">
-            <input
-              type="text"
-              name="name"
-              required
-              placeholder=" "
-              value={form.name}
-              onChange={handleChange}
-            />
-            <label>Name</label>
-          </div>
+        <div className="input-group">
+          <input
+            type="text"
+            name="name"
+            required
+            placeholder=" "
+            value={form.name}
+            onChange={handleChange}
+          />
+          <label>Name</label>
+        </div>
 
-          <div className="input-group">
-            <input
-              type="email"
-              name="email"
-              required
-              placeholder=" "
-              value={form.email}
-              onChange={handleChange}
-            />
-            <label>Email</label>
-          </div>
+        <div className="input-group">
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder=" "
+            value={form.email}
+            onChange={handleChange}
+          />
+          <label>Email</label>
+        </div>
 
-          <div className="input-group">
-            <input
-              type="tel"
-              name="mobile"
-              required
-              placeholder=" "
-              value={form.mobile}
-              onChange={handleChange}
-            />
-            <label>Mobile Number</label>
-          </div>
+        <div className="input-group">
+          <input
+            type="tel"
+            name="mobile"
+            required
+            placeholder=" "
+            value={form.mobile}
+            onChange={handleChange}
+          />
+          <label>Mobile Number</label>
+        </div>
 
-          <div className="input-group">
-            <textarea
-              name="query"
-              required
-              placeholder=" "
-              value={form.query}
-              onChange={handleChange}
-            />
-            <label>Your Query</label>
-          </div>
+        <div className="input-group">
+          <textarea
+            name="query"
+            required
+            placeholder=" "
+            value={form.query}
+            onChange={handleChange}
+          />
+          <label>Your Query</label>
+        </div>
 
-          <button type="submit">Send via WhatsApp</button>
-        </form>
-      </div>
-    </>
+        <button type="submit">Send via WhatsApp</button>
+      </form>
+    </div>
   );
 }
